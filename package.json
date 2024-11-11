@@ -1,0 +1,38 @@
+{
+  "name": "collapsible",
+  "version": "1.0.0",
+  "description": "Collapse\\expand block for any react applications",
+  "main": "src/index.tsx",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.tsx --format cjs,esm --dts",
+    "lint": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kolosochek/collapsible.git#main"
+  },
+  "keywords": [
+    "react",
+    "react-spring",
+    "collapse",
+    "expand",
+    "animation"
+  ],
+  "author": "Dmitriy Kolosovskiy",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/kolosochek/collapsible/issues"
+  },
+  "dependencies": {
+    "tsup": "^8.3.5",
+    "typescript": "latest",
+    "react-dom": "latest",
+    "react": "latest",
+    "@types/react-dom": "latest",
+    "@types/react": "latest",
+    "@react-spring/web": "^9.7.5"
+  },
+  "homepage": "https://github.com/kolosochek/collapsible/tree/main#readme"
+}
