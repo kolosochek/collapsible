@@ -7,9 +7,6 @@ export type TContainerHeight = SpringValues<{
   opacity: number;
 }>;
 
-const collapsibleModesArr = ["vertical", "horizontal"] as const;
-type TCollapsibleMode = (typeof collapsibleModesArr)[number];
-
 const collapsibleStylesArr = ["wrapper", "content"] as const;
 type TCollapsibleStylesSection = (typeof collapsibleStylesArr)[number];
 
@@ -20,7 +17,6 @@ type TCollapsibleStyles = Partial<{
 interface ICollapsibleBaseProps {
   content: React.ReactNode;
   isExpanded: boolean;
-  mode?: TCollapsibleMode;
   isInitiallyExpanded?: boolean;
   setIsExpanded: Dispatch<SetStateAction<boolean>> | ((flag: boolean) => void);
   isOverflowHidden?: boolean;
