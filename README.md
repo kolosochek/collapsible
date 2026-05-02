@@ -7,7 +7,7 @@ A small, focused React component for collapse/expand interactions, animated by [
 ## Install
 
 ```bash
-npm install collapsible @react-spring/web
+npm install @dkolosovsky/collapsible @react-spring/web
 ```
 
 `react`, `react-dom`, and `@react-spring/web` are peer dependencies.
@@ -16,7 +16,7 @@ npm install collapsible @react-spring/web
 
 ```tsx
 import { useState } from "react";
-import { Collapsible } from "collapsible";
+import { Collapsible } from "@dkolosovsky/collapsible";
 
 const App = () => {
   const [isExpanded, setIsExpanded] = useState(false);

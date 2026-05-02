@@ -1,5 +1,5 @@
 {
-  "name": "collapsible",
+  "name": "@dkolosovsky/collapsible",
   "version": "2.0.0",
   "description": "Collapse\\expand block for any react applications",
   "main": "dist/index.js",
