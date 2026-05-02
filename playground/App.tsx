@@ -1,8 +1,16 @@
+import { useState } from "react";
+import Sidebar, { TView } from "./nav/Sidebar";
+
 const App = () => {
+  const [view, setView] = useState<TView>("presets");
+
   return (
-    <div style={{ padding: 24 }}>
-      <h1>Collapsible — Playground</h1>
-      <p>Bootstrap OK. Sidebar and content come in Task 5.</p>
+    <div className="app__layout">
+      <Sidebar active={view} onChange={setView} />
+      <main className="app__main">
+        <h1>{view}</h1>
+        <p>View "{view}" — content arrives in later tasks.</p>
+      </main>
     </div>
   );
 };
