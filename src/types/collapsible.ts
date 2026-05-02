@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
-import {SpringConfig, SpringValues} from "@react-spring/web";
+import { SpringConfig, SpringValues } from "@react-spring/web";
+import { TAnimationPreset } from "../components/Collapsible/presets";
 
 export type TContainerHeight = SpringValues<{
   height: number | string;
@@ -24,6 +25,7 @@ interface ICollapsibleBaseProps {
   isAnimateHeight?: boolean;
   isSetHeightAuto?: boolean;
   isContentSelectable?: boolean;
+  animationPreset?: TAnimationPreset;
   animationHeightConfig?: SpringConfig;
   animationOpacityConfig?: SpringConfig;
   customStyles?: TCollapsibleStyles;

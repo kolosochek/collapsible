@@ -1,7 +1,8 @@
 import React from "react";
 import { useEffect, useRef } from "react";
-import { animated, useSpring } from "@react-spring/web";
+import { animated, useSpring, SpringConfig } from "@react-spring/web";
 import styles from "./styles.module.css";
+import { PRESETS } from "./presets";
 import { TCollapsibleProps, TContainerHeight } from "../../types/collapsible";
 import { isFunction, isUndefined } from "../../types/typeguards";
 
@@ -16,11 +17,8 @@ const Collapsible = ({
   isAccordion = false,
   isContentSelectable = true,
   minHeight,
-  animationHeightConfig = {
-    mass: 1,
-    tension: 176,
-    friction: 26,
-  },
+  animationPreset = "gentle",
+  animationHeightConfig,
   animationOpacityConfig = {
     duration: 250,
   },
@@ -30,7 +28,6 @@ const Collapsible = ({
   openedTabId,
   setOpenedTabId,
   finalHeight = "auto",
-  // callbacks
   onAnimationFinished,
 }: TCollapsibleProps) => {
   const isExpandedRef = useRef<boolean>(isExpanded);
@@ -39,13 +36,15 @@ const Collapsible = ({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const containerContentRef = useRef<HTMLDivElement | null>(null);
 
+  const resolvedHeightConfig: SpringConfig = {
+    ...PRESETS[animationPreset],
+    ...animationHeightConfig,
+  };
+
   const handleAnimationStart = () => {
     wrapperRef.current?.classList.add(styles.state__animate);
   };
 
-  // Keep the onRest logic in a ref so the version captured by the initial
-  // useSpring(() => ...) call always sees the latest props (isSetHeightAuto,
-  // finalHeight, onAnimationFinished) instead of the ones from mount.
   const animationRestRef = useRef<() => void>(() => {});
   animationRestRef.current = () => {
     if (isExpandedRef.current && isSetHeightAuto) {
@@ -85,7 +84,7 @@ const Collapsible = ({
       onRest: handleAnimationRest,
       config: (key: string) => {
         if (key === "height") {
-          return animationHeightConfig;
+          return resolvedHeightConfig;
         } else if (key === "opacity" && isAnimateOpacity) {
           return animationOpacityConfig;
         }
@@ -145,14 +144,12 @@ const Collapsible = ({
     height: height,
   };
 
-  // collapse other tabs if is any another tab is expanded
   useEffect(() => {
     if (isAccordion && openedTabId !== accordionTabId) {
       collapseContainer(false);
     }
   }, [openedTabId]);
 
-  // react to external isExpanded changes (skip the very first mount)
   useEffect(() => {
     if (!isMountedRef.current) {
       isMountedRef.current = true;
