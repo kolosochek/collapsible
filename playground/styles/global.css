@@ -1,0 +1,87 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  color: #1a1a1a;
+  background: #fafafa;
+}
+
+a {
+  color: #0a66c2;
+}
+
+h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.6rem;
+}
+
+p {
+  line-height: 1.55;
+}
+
+.app__layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+}
+
+.app__sidebar {
+  background: #fff;
+  border-right: 1px solid #e5e5e5;
+  padding: 24px 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.app__sidebar h2 {
+  margin: 0 24px 16px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b6b6b;
+}
+
+.app__nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.app__nav-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: 10px 24px;
+  font: inherit;
+  color: #1a1a1a;
+  cursor: pointer;
+}
+
+.app__nav-item:hover {
+  background: #f1f1f1;
+}
+
+.app__nav-item--active {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.app__main {
+  padding: 32px 40px 80px;
+  max-width: 960px;
+  width: 100%;
+}

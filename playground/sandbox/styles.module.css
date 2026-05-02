@@ -1,0 +1,132 @@
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.panel {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.panel_title {
+  margin: 0 0 12px;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b6b6b;
+}
+
+.control_row {
+  display: grid;
+  grid-template-columns: 110px 1fr 60px;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0;
+}
+
+.control_row label {
+  font-size: 0.85rem;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+.control_row input[type="range"] {
+  width: 100%;
+}
+
+.control_row .value {
+  font-size: 0.85rem;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  text-align: right;
+  color: #444;
+}
+
+.toggle_row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+  font-size: 0.85rem;
+}
+
+.select_row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 12px;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.select_row select {
+  padding: 6px 8px;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  font: inherit;
+}
+
+.profiles_list {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profile_item {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 8px;
+  align-items: center;
+  padding: 6px 8px;
+  background: #f7f7f7;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.profile_item button {
+  padding: 4px 8px;
+  border: 1px solid #d4d4d4;
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.8rem;
+}
+
+.profile_actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.preview {
+  margin-top: 24px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.preview button {
+  padding: 8px 14px;
+  border: 1px solid #d4d4d4;
+  background: #fafafa;
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+  margin-bottom: 12px;
+}
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #1a1a1a;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}

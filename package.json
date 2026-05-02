@@ -1,38 +1,44 @@
 {
   "name": "collapsible",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Collapse\\expand block for any react applications",
-  "main": "src/index.tsx",
+  "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "sideEffects": false,
   "scripts": {
-    "build": "tsup src/index.tsx --format cjs,esm --dts",
-    "lint": "tsc"
+    "dev": "vite",
+    "lint": "tsc --noEmit",
+    "build": "tsup --config tsup.config.ts",
+    "playground:build": "vite build",
+    "playground:preview": "vite preview"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kolosochek/collapsible.git#main"
   },
-  "keywords": [
-    "react",
-    "react-spring",
-    "collapse",
-    "expand",
-    "animation"
-  ],
+  "keywords": ["react", "react-spring", "collapse", "expand", "animation"],
   "author": "Dmitriy Kolosovskiy",
   "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/kolosochek/collapsible/issues"
   },
-  "dependencies": {
-    "tsup": "^8.3.5",
-    "typescript": "latest",
-    "react-dom": "latest",
-    "react": "latest",
-    "@types/react-dom": "latest",
-    "@types/react": "latest",
+  "homepage": "https://github.com/kolosochek/collapsible/tree/main#readme",
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18",
     "@react-spring/web": "^9.7.5"
   },
-  "homepage": "https://github.com/kolosochek/collapsible/tree/main#readme"
+  "devDependencies": {
+    "@react-spring/web": "^9.7.5",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.0"
+  }
 }
