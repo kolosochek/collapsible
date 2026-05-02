@@ -43,7 +43,11 @@ const Collapsible = ({
     wrapperRef.current?.classList.add(styles.state__animate);
   };
 
-  const handleAnimationRest = () => {
+  // Keep the onRest logic in a ref so the version captured by the initial
+  // useSpring(() => ...) call always sees the latest props (isSetHeightAuto,
+  // finalHeight, onAnimationFinished) instead of the ones from mount.
+  const animationRestRef = useRef<() => void>(() => {});
+  animationRestRef.current = () => {
     if (isExpandedRef.current && isSetHeightAuto) {
       api.start({
         height: finalHeight,
@@ -55,6 +59,8 @@ const Collapsible = ({
       onAnimationFinished();
     }
   };
+
+  const handleAnimationRest = () => animationRestRef.current();
 
   const [{ height, opacity }, api] = useSpring<TContainerHeight>(() => {
     const resultContainerHeight = containerRef.current
