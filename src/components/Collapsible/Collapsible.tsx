@@ -34,9 +34,27 @@ const Collapsible = ({
   onAnimationFinished,
 }: TCollapsibleProps) => {
   const isExpandedRef = useRef<boolean>(isExpanded);
+  const isMountedRef = useRef<boolean>(false);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const containerContentRef = useRef<HTMLDivElement | null>(null);
+
+  const handleAnimationStart = () => {
+    wrapperRef.current?.classList.add(styles.state__animate);
+  };
+
+  const handleAnimationRest = () => {
+    if (isExpandedRef.current && isSetHeightAuto) {
+      api.start({
+        height: finalHeight,
+        immediate: true,
+      });
+    }
+    wrapperRef.current?.classList.remove(styles.state__animate);
+    if (isFunction(onAnimationFinished)) {
+      onAnimationFinished();
+    }
+  };
 
   const [{ height, opacity }, api] = useSpring<TContainerHeight>(() => {
     const resultContainerHeight = containerRef.current
@@ -57,20 +75,8 @@ const Collapsible = ({
         opacity: 1,
       },
       immediate: !isAnimateHeight,
-      onStart: () => {
-        // append animate class
-        wrapperRef.current?.classList.add(styles.state__animate);
-      },
-      onRest: () => {
-        if (isExpandedRef.current && isSetHeightAuto) {
-          api.start({
-            height: finalHeight,
-            immediate: true,
-          });
-        }
-        // remove animate class
-        wrapperRef.current?.classList.remove(styles.state__animate);
-      },
+      onStart: handleAnimationStart,
+      onRest: handleAnimationRest,
       config: (key: string) => {
         if (key === "height") {
           return animationHeightConfig;
@@ -79,7 +85,7 @@ const Collapsible = ({
         }
       },
     };
-  }, [containerRef.current]);
+  });
 
   const collapseContainer = (isClearAccordionTab: boolean = true) => {
     const resultContainerHeight = containerRef.current
@@ -101,11 +107,8 @@ const Collapsible = ({
         opacity: isUndefined(minHeight) && isAnimateOpacity ? 0 : 1,
       },
       immediate: !isAnimateHeight,
-      onRest: () => {
-        if (isFunction(onAnimationFinished)) {
-          onAnimationFinished();
-        }
-      },
+      onStart: handleAnimationStart,
+      onRest: handleAnimationRest,
     });
   };
 
@@ -120,11 +123,8 @@ const Collapsible = ({
     api.start({
       height: containerContentRef.current.offsetHeight,
       opacity: 1,
-      onRest: () => {
-        if (isFunction(onAnimationFinished)) {
-          onAnimationFinished();
-        }
-      },
+      onStart: handleAnimationStart,
+      onRest: handleAnimationRest,
     });
   };
 
@@ -146,13 +146,15 @@ const Collapsible = ({
     }
   }, [openedTabId]);
 
-  // collapse tabs by external state change
+  // react to external isExpanded changes (skip the very first mount)
   useEffect(() => {
-    if (isUndefined(isExpandedRef.current)) {
+    if (!isMountedRef.current) {
+      isMountedRef.current = true;
       isExpandedRef.current = isExpanded;
+      return;
     }
 
-    if (!isExpanded) {
+    if (!isExpanded && isExpandedRef.current) {
       collapseContainer(!isAccordion);
     } else if (isExpanded && !isExpandedRef.current) {
       expandContainer();
