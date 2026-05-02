@@ -112,17 +112,19 @@ Replace the file contents with:
   },
   "devDependencies": {
     "@react-spring/web": "^9.7.5",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.0",
-    "react": "latest",
-    "react-dom": "latest",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "tsup": "^8.3.5",
-    "typescript": "latest",
+    "typescript": "^5.6.3",
     "vite": "^5.4.0"
   }
 }
 ```
+
+> **Note:** `typescript` is pinned to `^5.6.3` (latest TS5) instead of `latest`. TypeScript 6 introduces stricter checks (`moduleResolution: "node"` becomes a hard error, `react-jsx` transform changes children inference) that conflict with `@react-spring/web@9.7.5`'s typings. Pinning to TS5 keeps the plan working as written. React/react-dom and their types are pinned to known-good 18.x rather than `latest` for the same stability reason.
 
 - [ ] **Step 2: Update `.gitignore`**
 
@@ -154,7 +156,7 @@ Replace contents with:
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
